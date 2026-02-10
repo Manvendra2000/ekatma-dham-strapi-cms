@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "core_texts",
+  "info": {
+    "singularName": "core-text",
+    "pluralName": "core-texts",
+    "displayName": "Core_Text"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "verse_id": {
+      "type": "uid"
+    },
+    "text": {
+      "type": "blocks"
+    },
+    "chapter": {
+      "type": "integer"
+    },
+    "verse_number": {
+      "type": "integer"
+    },
+    "commentaries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commentary.commentary",
+      "mappedBy": "core_text"
+    }
+  }
+}

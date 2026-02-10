@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commentaries",
+  "info": {
+    "singularName": "commentary",
+    "pluralName": "commentaries",
+    "displayName": "Commentary"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "enum": [
+        "Bhashya",
+        "Teeka",
+        "Vartika"
+      ]
+    },
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::author.author"
+    },
+    "content": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "core_text": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::core-text.core-text",
+      "inversedBy": "commentaries"
+    }
+  }
+}
