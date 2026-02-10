@@ -1,61 +1,119 @@
-# 🚀 Getting started with Strapi
+# Ekatmdham Library CMS
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+A Strapi-based CMS for managing spiritual texts, commentaries, and multilingual content.
 
-### `develop`
+## Overview
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+This CMS manages a structured library of spiritual texts with support for:
+- Multilingual content (Sanskrit, English, Hindi)
+- Author commentaries and interpretations
+- Hierarchical text organization
+- Internationalization (i18n)
+
+## Tech Stack
+
+- **Backend**: Strapi 5.35.0
+- **Database**: SQLite (better-sqlite3)
+- **Node.js**: >=20.0.0
+- **Plugins**: GraphQL, Users & Permissions, Cloud, Localazy
+
+## Quick Start
+
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Set up environment**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Access admin panel**
+   Visit `http://localhost:1337/admin`
+
+## Project Structure
 
 ```
-npm run develop
-# or
-yarn develop
+ekatmdham-lib-cms/
+├── config/                 # Strapi configuration
+├── database/              # Database files and migrations
+├── public/                # Static assets
+├── src/
+│   ├── admin/             # Admin panel extensions
+│   ├── api/               # Content types and API routes
+│   │   ├── author/        # Author content type
+│   │   ├── commentary/    # Commentary content type
+│   │   └── core-text/     # Text/Unit content type
+│   ├── extensions/        # Strapi extensions
+│   └── index.js          # App entry point
+├── types/                 # TypeScript definitions
+├── .env.example          # Environment variables template
+├── package.json          # Dependencies and scripts
+└── README.md             # This file
 ```
 
-### `start`
+## Content Model
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+### Books (Core Texts)
+- Spiritual texts like Bhagavad Gita, Upanishads
+- Created once, referenced by units
 
+### Units
+- Text sections (chapters, verses, mantras)
+- Support multiple languages via Strapi i18n
+- Examples: Gita Chapter 2 Verse 47, Mandukya Mantra 7
+
+### Authors
+- Independent commentator entities
+- Reusable across multiple texts
+- Examples: Shankaracharya, Ramanujacharya
+
+### Commentaries
+- Author interpretations linked to specific units
+- Support commentary types (Bhashya, Teeka, etc.)
+- Multilingual content support
+- Hierarchical relationships via parent_commentary
+
+## Development Scripts
+
+```bash
+npm run dev          # Start development server
+npm run develop      # Alias for dev
+npm run start        # Start production server
+npm run build        # Build for production
+npm run deploy       # Deploy to Strapi Cloud
+npm run console      # Open Strapi console
+npm run upgrade      # Upgrade Strapi version
+npm run upgrade:dry  # Dry run upgrade check
 ```
-npm run start
-# or
-yarn start
-```
 
-### `build`
+## Environment Configuration
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+Key environment variables (see `.env.example`):
+- `HOST` - Server host (default: 0.0.0.0)
+- `PORT` - Server port (default: 1337)
+- `APP_KEYS` - Application keys
+- `JWT_SECRET` - JWT authentication secret
+- `ADMIN_JWT_SECRET` - Admin panel JWT secret
 
-```
-npm run build
-# or
-yarn build
-```
+## Contributing
 
-## ⚙️ Deployment
+1. Follow existing content type patterns in `src/api/`
+2. Test multilingual functionality when adding new content
+3. Maintain i18n structure for new content types
+4. Use Strapi conventions for API routes and controllers
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+## Features
 
-```
-yarn strapi deploy
-```
-
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+- **Multilingual Support**: Built-in i18n for content
+- **GraphQL API**: Query content efficiently
+- **User Management**: Role-based permissions
+- **Cloud Ready**: Deploy to Strapi Cloud
+- **Extensible**: Plugin architecture for custom features
