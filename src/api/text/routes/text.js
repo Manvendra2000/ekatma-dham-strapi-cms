@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * core-text router
+ * text router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::core-text.core-text');
+module.exports = createCoreRouter('api::text.text');

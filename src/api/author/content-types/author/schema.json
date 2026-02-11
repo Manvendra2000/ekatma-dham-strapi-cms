@@ -12,12 +12,11 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
-    "tradition": {
-      "type": "string"
-    },
-    "era": {
+    "school": {
       "type": "string"
     }
   }

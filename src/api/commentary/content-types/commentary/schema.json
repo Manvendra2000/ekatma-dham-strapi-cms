@@ -9,43 +9,25 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
-    "type": {
-      "type": "enumeration",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "enum": [
-        "Bhashya",
-        "Teeka",
-        "Vartika"
-      ]
-    },
-    "author": {
+    "category": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::author.author"
+      "target": "api::category.category"
     },
     "content": {
       "type": "richtext",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "required": true
     },
-    "core_text": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::core-text.core-text",
-      "inversedBy": "commentaries"
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Bhashya",
+        "Teeka",
+        "Karika"
+      ]
     }
   }
 }

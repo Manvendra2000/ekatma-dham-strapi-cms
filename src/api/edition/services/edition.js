@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * core-text service
+ * edition service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::core-text.core-text');
+module.exports = createCoreService('api::edition.edition');

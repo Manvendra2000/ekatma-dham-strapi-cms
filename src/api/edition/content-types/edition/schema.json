@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "editions",
+  "info": {
+    "singularName": "edition",
+    "pluralName": "editions",
+    "displayName": "Edition"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::author.author"
+    },
+    "language": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "sa",
+        "en",
+        "hi",
+        "ta"
+      ]
+    }
+  }
+}
