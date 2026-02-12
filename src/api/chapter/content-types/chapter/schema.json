@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chapters",
+  "info": {
+    "singularName": "chapter",
+    "pluralName": "chapters",
+    "displayName": "Chapter"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Chapter_Number": {
+      "type": "integer"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "book": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::book.book",
+      "inversedBy": "chapters"
+    },
+    "shlokas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::shloka.shloka",
+      "mappedBy": "chapter"
+    }
+  }
+}

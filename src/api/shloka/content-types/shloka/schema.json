@@ -10,5 +10,29 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
-  "attributes": {}
+  "attributes": {
+    "Verse_Number": {
+      "type": "integer"
+    },
+    "Text": {
+      "type": "blocks"
+    },
+    "Translation": {
+      "type": "blocks"
+    },
+    "Transliteration": {
+      "type": "string"
+    },
+    "chapter": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::chapter.chapter",
+      "inversedBy": "shlokas"
+    },
+    "Commentry": {
+      "type": "component",
+      "component": "commentary.bhashya",
+      "repeatable": true
+    }
+  }
 }
