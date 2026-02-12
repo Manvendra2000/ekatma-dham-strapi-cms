@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_commentary_tikas",
+  "info": {
+    "displayName": "Tika"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "blocks"
+    },
+    "translation": {
+      "type": "blocks"
+    },
+    "transliteration": {
+      "type": "text"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::author.author"
+    }
+  },
+  "config": {}
+}

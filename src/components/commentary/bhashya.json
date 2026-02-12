@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_commentary_bhashyas",
+  "info": {
+    "displayName": "Bhashya"
+  },
+  "options": {},
+  "attributes": {
+    "Text": {
+      "type": "blocks"
+    },
+    "translation": {
+      "type": "blocks"
+    },
+    "transliteration": {
+      "type": "text"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::author.author"
+    },
+    "tika": {
+      "type": "component",
+      "component": "commentary.tika",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

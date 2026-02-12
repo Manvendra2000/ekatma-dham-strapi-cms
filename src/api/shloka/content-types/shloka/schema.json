@@ -1,0 +1,14 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shlokas",
+  "info": {
+    "singularName": "shloka",
+    "pluralName": "shlokas",
+    "displayName": "Shloka"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {}
+}
