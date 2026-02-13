@@ -51,5 +51,3 @@ Use this format to POST data to `http://localhost:1337/api/shlokas`:
 }
 
 ```
-
-**Next Step:** Would you like me to help you set up the **Author profiles** so you can start linking commentators like Adi Shankara to your data?
