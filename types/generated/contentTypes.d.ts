@@ -559,26 +559,60 @@ export interface ApiShlokaShloka extends Struct.CollectionTypeSchema {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
     chapter: Schema.Attribute.Relation<'manyToOne', 'api::chapter.chapter'>;
-    Commentry: Schema.Attribute.Component<'commentary.bhashya', true>;
+    Commentry: Schema.Attribute.Component<'commentary.bhashya', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::shloka.shloka'
+    extra_variables: Schema.Attribute.DynamicZone<
+      ['variables.numeric-variable', 'variables.text-variable']
     > &
-      Schema.Attribute.Private;
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::shloka.shloka'>;
     publishedAt: Schema.Attribute.DateTime;
-    Text: Schema.Attribute.Blocks;
-    Translation: Schema.Attribute.Blocks;
-    Transliteration: Schema.Attribute.String;
+    Text: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Translation: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Transliteration: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Verse_Number: Schema.Attribute.Integer;
+    Verse_Number: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 

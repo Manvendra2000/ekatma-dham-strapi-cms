@@ -27,11 +27,35 @@ export interface CommentaryTika extends Struct.ComponentSchema {
   };
 }
 
+export interface VariablesNumericVariable extends Struct.ComponentSchema {
+  collectionName: 'components_variables_numeric_variables';
+  info: {
+    displayName: 'Numeric_Variable';
+  };
+  attributes: {
+    Label: Schema.Attribute.String;
+    Value: Schema.Attribute.BigInteger;
+  };
+}
+
+export interface VariablesTextVariable extends Struct.ComponentSchema {
+  collectionName: 'components_variables_text_variables';
+  info: {
+    displayName: 'Text_Variable';
+  };
+  attributes: {
+    Label: Schema.Attribute.String;
+    Value: Schema.Attribute.Text;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'commentary.bhashya': CommentaryBhashya;
       'commentary.tika': CommentaryTika;
+      'variables.numeric-variable': VariablesNumericVariable;
+      'variables.text-variable': VariablesTextVariable;
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_variables_text_variables",
+  "info": {
+    "displayName": "Text_Variable"
+  },
+  "options": {},
+  "attributes": {
+    "Label": {
+      "type": "string"
+    },
+    "Value": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

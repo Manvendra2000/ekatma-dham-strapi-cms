@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_variables_numeric_variables",
+  "info": {
+    "displayName": "Numeric_Variable"
+  },
+  "options": {},
+  "attributes": {
+    "Label": {
+      "type": "string"
+    },
+    "Value": {
+      "type": "biginteger"
+    }
+  },
+  "config": {}
+}
