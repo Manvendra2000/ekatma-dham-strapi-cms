@@ -7,7 +7,11 @@ export interface CommentaryBhashya extends Struct.ComponentSchema {
   };
   attributes: {
     author: Schema.Attribute.Relation<'oneToOne', 'api::author.author'>;
-    Text: Schema.Attribute.Blocks;
+    authorTitle: Schema.Attribute.String;
+    content: Schema.Attribute.Blocks;
+    isAiTranslated: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    language: Schema.Attribute.Relation<'oneToOne', 'api::language.language'>;
     tika: Schema.Attribute.Component<'commentary.tika', true>;
     translation: Schema.Attribute.Blocks;
     transliteration: Schema.Attribute.Text;
@@ -21,7 +25,10 @@ export interface CommentaryTika extends Struct.ComponentSchema {
   };
   attributes: {
     author: Schema.Attribute.Relation<'oneToOne', 'api::author.author'>;
-    text: Schema.Attribute.Blocks;
+    authorTitle: Schema.Attribute.String;
+    content: Schema.Attribute.Blocks;
+    isAiTranslated: Schema.Attribute.Boolean;
+    language: Schema.Attribute.Relation<'oneToOne', 'api::language.language'>;
     translation: Schema.Attribute.Blocks;
     transliteration: Schema.Attribute.Text;
   };

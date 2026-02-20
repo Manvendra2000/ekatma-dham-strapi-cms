@@ -5,7 +5,7 @@
   },
   "options": {},
   "attributes": {
-    "Text": {
+    "content": {
       "type": "blocks"
     },
     "translation": {
@@ -23,6 +23,18 @@
       "type": "component",
       "component": "commentary.tika",
       "repeatable": true
+    },
+    "language": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::language.language"
+    },
+    "isAiTranslated": {
+      "type": "boolean",
+      "default": false
+    },
+    "authorTitle": {
+      "type": "string"
     }
   },
   "config": {}

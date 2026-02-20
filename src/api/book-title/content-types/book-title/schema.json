@@ -1,29 +1,29 @@
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "book_titles",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "Category"
+    "singularName": "book-title",
+    "pluralName": "book-titles",
+    "displayName": "BookTitle"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "title": {
       "type": "string"
     },
-    "books": {
+    "book": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::book.book",
-      "mappedBy": "category"
+      "inversedBy": "book_titles"
     },
-    "parent": {
+    "language": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::category.category"
+      "target": "api::language.language"
     }
   }
 }

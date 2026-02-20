@@ -25,6 +25,37 @@
       "relation": "oneToMany",
       "target": "api::chapter.chapter",
       "mappedBy": "book"
+    },
+    "book_titles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::book-title.book-title",
+      "mappedBy": "book"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "totalVerses": {
+      "type": "integer"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::author.author",
+      "inversedBy": "books"
     }
   }
 }

@@ -1,39 +1,33 @@
 {
   "kind": "collectionType",
-  "collectionName": "chapters",
+  "collectionName": "sections",
   "info": {
-    "singularName": "chapter",
-    "pluralName": "chapters",
-    "displayName": "Chapter"
+    "singularName": "section",
+    "pluralName": "sections",
+    "displayName": "Section"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Chapter_Number": {
+    "Section_Number": {
       "type": "integer"
     },
     "Title": {
       "type": "string"
     },
-    "book": {
+    "chapter": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::book.book",
-      "inversedBy": "chapters"
+      "target": "api::chapter.chapter",
+      "inversedBy": "sections"
     },
     "shlokas": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::shloka.shloka",
-      "mappedBy": "chapter"
-    },
-    "sections": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::section.section",
-      "mappedBy": "chapter"
+      "mappedBy": "section"
     },
     "slug": {
       "type": "uid"

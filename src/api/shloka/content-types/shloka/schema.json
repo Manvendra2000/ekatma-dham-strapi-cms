@@ -74,6 +74,48 @@
         "variables.numeric-variable",
         "variables.text-variable"
       ]
+    },
+    "section": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::section.section",
+      "inversedBy": "shlokas"
+    },
+    "verse_translations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::verse-translation.verse-translation",
+      "mappedBy": "shloka"
+    },
+    "word_meanings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::word-meaning.word-meaning",
+      "mappedBy": "shloka"
+    },
+    "sectionTitle": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "khandaTitle": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "adhyayTitle": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

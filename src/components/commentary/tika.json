@@ -5,7 +5,7 @@
   },
   "options": {},
   "attributes": {
-    "text": {
+    "content": {
       "type": "blocks"
     },
     "translation": {
@@ -18,6 +18,17 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::author.author"
+    },
+    "isAiTranslated": {
+      "type": "boolean"
+    },
+    "language": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::language.language"
+    },
+    "authorTitle": {
+      "type": "string"
     }
   },
   "config": {}
