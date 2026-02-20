@@ -21,11 +21,11 @@
     "bio": {
       "type": "blocks"
     },
-    "category": {
+    "books": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category",
-      "mappedBy": "parent"
+      "relation": "oneToMany",
+      "target": "api::book.book",
+      "mappedBy": "author"
     }
   }
 }

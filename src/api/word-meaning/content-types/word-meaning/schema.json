@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "word_meanings",
+  "info": {
+    "singularName": "word-meaning",
+    "pluralName": "word-meanings",
+    "displayName": "WordMeaning"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "word": {
+      "type": "string"
+    },
+    "meaning": {
+      "type": "string"
+    },
+    "position": {
+      "type": "integer"
+    },
+    "shloka": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::shloka.shloka",
+      "inversedBy": "word_meanings"
+    }
+  }
+}

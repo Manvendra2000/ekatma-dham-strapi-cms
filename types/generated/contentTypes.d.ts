@@ -442,7 +442,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
   attributes: {
     bio: Schema.Attribute.Blocks;
-    category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
+    books: Schema.Attribute.Relation<'oneToMany', 'api::book.book'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -461,6 +461,36 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBookTitleBookTitle extends Struct.CollectionTypeSchema {
+  collectionName: 'book_titles';
+  info: {
+    displayName: 'BookTitle';
+    pluralName: 'book-titles';
+    singularName: 'book-title';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    book: Schema.Attribute.Relation<'manyToOne', 'api::book.book'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    language: Schema.Attribute.Relation<'oneToOne', 'api::language.language'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::book-title.book-title'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBookBook extends Struct.CollectionTypeSchema {
   collectionName: 'books';
   info: {
@@ -472,16 +502,28 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
+    book_titles: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::book-title.book-title'
+    >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     chapters: Schema.Attribute.Relation<'oneToMany', 'api::chapter.chapter'>;
+    coverImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::book.book'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID;
     Title: Schema.Attribute.String;
+    totalVerses: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -510,7 +552,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     Name: Schema.Attribute.String;
-    parent: Schema.Attribute.Relation<'oneToOne', 'api::author.author'>;
+    parent: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -541,7 +583,72 @@ export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    sections: Schema.Attribute.Relation<'oneToMany', 'api::section.section'>;
     shlokas: Schema.Attribute.Relation<'oneToMany', 'api::shloka.shloka'>;
+    slug: Schema.Attribute.UID;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLanguageLanguage extends Struct.CollectionTypeSchema {
+  collectionName: 'languages';
+  info: {
+    displayName: 'Language';
+    pluralName: 'languages';
+    singularName: 'language';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::language.language'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    nativeName: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    script: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSectionSection extends Struct.CollectionTypeSchema {
+  collectionName: 'sections';
+  info: {
+    displayName: 'Section';
+    pluralName: 'sections';
+    singularName: 'section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    chapter: Schema.Attribute.Relation<'manyToOne', 'api::chapter.chapter'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::section.section'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Section_Number: Schema.Attribute.Integer;
+    shlokas: Schema.Attribute.Relation<'oneToMany', 'api::shloka.shloka'>;
+    slug: Schema.Attribute.UID;
     Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -565,6 +672,12 @@ export interface ApiShlokaShloka extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    adhyayTitle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     chapter: Schema.Attribute.Relation<'manyToOne', 'api::chapter.chapter'>;
     Commentry: Schema.Attribute.Component<'commentary.bhashya', true> &
       Schema.Attribute.SetPluginOptions<{
@@ -583,9 +696,22 @@ export interface ApiShlokaShloka extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    khandaTitle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::shloka.shloka'>;
     publishedAt: Schema.Attribute.DateTime;
+    section: Schema.Attribute.Relation<'manyToOne', 'api::section.section'>;
+    sectionTitle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     Text: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -613,6 +739,78 @@ export interface ApiShlokaShloka extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    verse_translations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::verse-translation.verse-translation'
+    >;
+    word_meanings: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::word-meaning.word-meaning'
+    >;
+  };
+}
+
+export interface ApiVerseTranslationVerseTranslation
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'verse_translations';
+  info: {
+    displayName: 'VerseTranslation';
+    pluralName: 'verse-translations';
+    singularName: 'verse-translation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isAiTranslated: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    language: Schema.Attribute.Relation<'oneToOne', 'api::language.language'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::verse-translation.verse-translation'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    shloka: Schema.Attribute.Relation<'manyToOne', 'api::shloka.shloka'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWordMeaningWordMeaning extends Struct.CollectionTypeSchema {
+  collectionName: 'word_meanings';
+  info: {
+    displayName: 'WordMeaning';
+    pluralName: 'word-meanings';
+    singularName: 'word-meaning';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::word-meaning.word-meaning'
+    > &
+      Schema.Attribute.Private;
+    meaning: Schema.Attribute.String;
+    position: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    shloka: Schema.Attribute.Relation<'manyToOne', 'api::shloka.shloka'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    word: Schema.Attribute.String;
   };
 }
 
@@ -1128,10 +1326,15 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::author.author': ApiAuthorAuthor;
+      'api::book-title.book-title': ApiBookTitleBookTitle;
       'api::book.book': ApiBookBook;
       'api::category.category': ApiCategoryCategory;
       'api::chapter.chapter': ApiChapterChapter;
+      'api::language.language': ApiLanguageLanguage;
+      'api::section.section': ApiSectionSection;
       'api::shloka.shloka': ApiShlokaShloka;
+      'api::verse-translation.verse-translation': ApiVerseTranslationVerseTranslation;
+      'api::word-meaning.word-meaning': ApiWordMeaningWordMeaning;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
