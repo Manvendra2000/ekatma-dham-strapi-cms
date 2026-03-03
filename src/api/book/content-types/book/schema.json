@@ -56,6 +56,12 @@
       "relation": "manyToOne",
       "target": "api::author.author",
       "inversedBy": "books"
+    },
+    "shlokas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::shloka.shloka",
+      "mappedBy": "books"
     }
   }
 }

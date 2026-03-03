@@ -521,6 +521,7 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::book.book'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    shlokas: Schema.Attribute.Relation<'oneToMany', 'api::shloka.shloka'>;
     slug: Schema.Attribute.UID;
     Title: Schema.Attribute.String;
     totalVerses: Schema.Attribute.Integer;
@@ -678,6 +679,8 @@ export interface ApiShlokaShloka extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    book: Schema.Attribute.Relation<'oneToOne', 'api::book.book'>;
+    books: Schema.Attribute.Relation<'manyToOne', 'api::book.book'>;
     chapter: Schema.Attribute.Relation<'manyToOne', 'api::chapter.chapter'>;
     Commentry: Schema.Attribute.Component<'commentary.bhashya', true> &
       Schema.Attribute.SetPluginOptions<{
