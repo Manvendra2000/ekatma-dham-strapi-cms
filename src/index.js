@@ -119,5 +119,56 @@ module.exports = {
       console.log('   2. Settings > Users & Permissions Plugin > Roles > Public');
       console.log('   3. Enable "find" and "findOne" for each content type');
     }
+
+    // Populate dropdown content if missing
+    console.log("🚀 Checking for dropdown content...");
+
+    const defaultBooks = [
+      'Isha Upanishad Bhashya', 'Kena Upanishad Pada Bhashya', 'Kena Upanishad Vakya Bhashya',
+      'Katha Upanishad Bhashya', 'Prashna Upanishad Bhashya', 'Mundaka Upanishad Bhashya',
+      'Mandukya Upanishad Bhashya', 'Taittiriya Upanishad Bhashya', 'Aitareya Upanishad Bhashya',
+      'Chandogya Upanishad Bhashya', 'Brihadaranyaka Upanishad Bhashya', 'Bhagavad Gita Bhashya', 'Brahma Sutra Bhashya'
+    ];
+
+    const defaultAuthors = [
+      
+      'Abhirama Vidyamani’, ‘Anandagiri (Anandajnana)’, ‘Anantacharya’, ‘Anubhutisvarupacharya’, ‘Balakrishnananda Saraswati’, ‘Brahmananda Saraswati’, ‘Gaudapada’, ‘Gopalayatindra’, ‘Narayana Ashrama’, ‘Nityananda Ashrama’, ‘Ramachandrendra Saraswati’, ‘Sayana / Vidyaranya’, ‘Shankaracharya (Adi Shankara)’, ‘Shankarananda’, ‘Sureshwaracharya’, ‘Upanishad Brahmayogin’, ‘Vanamali Mishra'
+
+    ];
+
+    try {
+      // 1. Populate Authors (Used for Bhashya Lineage and Tika Allocations)
+      for (const name of defaultAuthors) {
+        const existing = await strapi.documents('api::author.author').findFirst({
+          filters: { name: { $eq: name } }
+        });
+
+        if (!existing) {
+          console.log(`+ Adding Author: ${name}`);
+          await strapi.documents('api::author.author').create({
+            data: { name, status: 'published' }
+          });
+        }
+      }
+
+      // 2. Populate Books (Volume Titles)
+      for (const title of defaultBooks) {
+        const existing = await strapi.documents('api::book.book').findFirst({
+          filters: { Title: { $eq: title } }
+        });
+
+        if (!existing) {
+          console.log(`+ Adding Book: ${title}`);
+          await strapi.documents('api::book.book').create({
+            data: { Title: title, status: 'published' }
+          });
+        }
+      }
+
+      console.log("✅ Dropdown content synchronized.");
+    } catch (error) {
+      console.error('❌ Error populating dropdown content:', error.message);
+      console.error('Stack:', error.stack);
+    }
   },
 };
