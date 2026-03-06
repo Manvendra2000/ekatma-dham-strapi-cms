@@ -62,6 +62,12 @@
       "relation": "oneToMany",
       "target": "api::shloka.shloka",
       "mappedBy": "books"
+    },
+    "shankaracharyaIntro": {
+      "type": "text"
+    },
+    "shankaracharyaIntroTranslation": {
+      "type": "text"
     }
   }
 }

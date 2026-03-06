@@ -521,6 +521,8 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::book.book'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    shankaracharyaIntro: Schema.Attribute.Text;
+    shankaracharyaIntroTranslation: Schema.Attribute.Text;
     shlokas: Schema.Attribute.Relation<'oneToMany', 'api::shloka.shloka'>;
     slug: Schema.Attribute.UID;
     Title: Schema.Attribute.String;
