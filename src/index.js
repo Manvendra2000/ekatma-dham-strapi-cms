@@ -94,6 +94,71 @@ module.exports = {
 
     /**
      * ==========================================================
+     * Seed Default Users
+     * ==========================================================
+     */
+
+    console.log("🚀 Checking for default users...");
+
+    const defaultUsers = [
+      {
+        email: 'admin@ekatma-dham.com',
+        username: 'admin',
+        password: 'Admin123!',
+        role: 'admin'
+      },
+      {
+        email: 'editor@ekatma-dham.com', 
+        username: 'editor',
+        password: 'Editor123!',
+        role: 'editor'
+      },
+      {
+        email: 'reader@ekatma-dham.com',
+        username: 'reader', 
+        password: 'Reader123!',
+        role: 'reader'
+      }
+    ];
+
+    try {
+      for (const userData of defaultUsers) {
+        const existing = await strapi.query('plugin::users-permissions.user').findOne({
+          where: { email: userData.email }
+        });
+
+        if (!existing) {
+          console.log(`+ Adding User: ${userData.email} (${userData.role})`);
+
+          const role = await strapi.query('plugin::users-permissions.role').findOne({
+            where: { type: userData.role }
+          });
+
+          if (role) {
+            await strapi.query('plugin::users-permissions.user').create({
+              data: {
+                email: userData.email,
+                username: userData.username,
+                password: userData.password,
+                role: role.id,
+                confirmed: true
+              }
+            });
+          } else {
+            console.log(`⚠️ Role '${userData.role}' not found for user ${userData.email}`);
+          }
+        }
+      }
+
+      console.log("✅ Default users synchronized.");
+
+    } catch (error) {
+      console.error('❌ Error creating default users:', error.message);
+    }
+
+
+    /**
+     * ==========================================================
      * Seed Dropdown Content
      * ==========================================================
      */
